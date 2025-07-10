@@ -46,6 +46,17 @@ in *IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2021, **
 | DP | ArcFace | iResNet18 | CASIA-WebFace | No | [BaiduDrive](https://pan.baidu.com/s/1M2M8u-GO6BnrxgYAOtXYEA) code: wq2w | [BaiduDrive](https://pan.baidu.com/s/1lp4wAlz85w2Y29DT8RqGfQ), code: 756e |
 
 
+## Dependencies
+
+- numpy
+- matplotlib
+- torch
+- torchvision
+- termcolor
+- loguru
+- tqdm
+- opencv-python
+
 ## Evaluation
 
 ### Face Recognition
