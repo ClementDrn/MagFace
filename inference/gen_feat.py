@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+import os
 import sys
-sys.path.append("..")
-sys.path.append("../../")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../..")
 
 from utils import utils
 from network_inf import builder_inf
@@ -21,7 +22,6 @@ import numpy as np
 import warnings
 import time
 import pprint
-import os
 
 # parse the args
 cprint('=> parse the args ...', 'green')
