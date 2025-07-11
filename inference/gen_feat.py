@@ -89,8 +89,9 @@ def main(args):
 def main_worker(ngpus_per_node, args):
     cprint('=> modeling the network ...', 'green')
     model = builder_inf(args)
-    model = torch.nn.DataParallel(model)
+
     if not args.cpu_mode:
+        model = torch.nn.DataParallel(model)
         model = model.cuda()
 
     cprint('=> building the dataloader ...', 'green')
@@ -109,7 +110,7 @@ def main_worker(ngpus_per_node, args):
         inf_dataset,
         batch_size=args.batch_size,
         num_workers=args.workers,
-        pin_memory=True,
+        pin_memory=not args.cpu_mode,
         shuffle=False)
 
     cprint('=> starting inference engine ...', 'green')
@@ -133,6 +134,10 @@ def main_worker(ngpus_per_node, args):
         for i, (input, img_paths) in enumerate(inf_loader):
             # measure data loading time
             data_time.update(time.time() - end)
+
+            # move input to the appropriate device
+            if not args.cpu_mode:
+                input = [inp.cuda(non_blocking=True) for inp in input]
 
             # compute output
             embedding_feat = model(input[0])
